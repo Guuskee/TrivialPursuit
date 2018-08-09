@@ -7,8 +7,8 @@ import java.io.IOException;
 
 public class Board extends JPanel {
 
-    int board_width = 100;
-    BufferedImage img = null;
+    private int board_width = 100;
+    private BufferedImage img = null;
 
     public Board(){
         try {
@@ -34,6 +34,5 @@ public class Board extends JPanel {
  /*   private void draw(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
     }*/
-
 
 }
