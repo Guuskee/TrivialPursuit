@@ -4,16 +4,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Game {
-
     static JFrame frame = new JFrame("Cloud Pursuit");
-    static int amountOfPlayers;
+    static private int amountOfPlayers;
 
     public static void main(String[] args) {
         startGame();
     }
 
-    public static void startGame(){
-        frame.setSize(300, 300);
+    private static void startGame(){
+        frame.setPreferredSize(new Dimension(900,900));
 
         JPanel start = new JPanel();
 
@@ -26,6 +25,7 @@ public class Game {
             public void actionPerformed(ActionEvent e) {
                 Object[] possibilities = { 2, 3, 4};
                 amountOfPlayers = (int)JOptionPane.showInputDialog(frame," How many players?","Select amount of player",JOptionPane.PLAIN_MESSAGE,null, possibilities,"2");
+                showBoard();
             }
         });
 
@@ -42,8 +42,10 @@ public class Game {
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+    }
+    public static void showBoard( ){
         Board board = new Board();
         frame.add(board, BorderLayout.NORTH);
+        SwingUtilities.updateComponentTreeUI(frame);
     }
 }
-//After selecting amount of players, new game should start. Hide panel "start" and show a new board with buttons and shit.
