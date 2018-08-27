@@ -9,29 +9,28 @@ public class Board extends JPanel {
 
     private int board_width = 500;
     private BufferedImage img = null;
-    private int amount;
-    private Tile[][] gameboard;
+    //private Tile[][] gameboard;
     static Player[] players ;
 
     Board(int amountUser){
-        amount = amountUser;
+
+        //Load the image of the board
         try {
             if (img == null) {
-                String img_file = "src/images/bord Colour volledig (002).jpg";
-                img = ImageIO.read(new File(img_file));
+                img = ImageIO.read(new File("src/images/bord Colour volledig (002).jpg"));
             }
         } catch (IOException e) {
             System.out.println("Unexpected Error");
         }
 
-        //Make array with the amount of player
-        players = new Player[amount];
+        /* Make array with the amount of player chosen */
+        players = new Player[amountUser];
         for(int i = 0; i < players.length; i++ ){
-            players[i] = new Player(i + 1, i + 2);
+            players[i] = new Player(i + 1);
         }
         players[0].isTurn = true;
-        loadImages(amount);
-        loadTile();
+        loadImages(); // load the images of the pawns to the corresponding player
+//        loadTile();
     }
 
     @Override
@@ -48,12 +47,12 @@ public class Board extends JPanel {
         return new Dimension(board_width + 20, board_width + 20);
     }
 
-    //load the image for each player.
-    private void loadImages(int amount){
+    //load the image of the pawn for each player.
+    private void loadImages(){
         try {
             int i = 1;
             for(Player p: players) {
-                p.icon = ImageIO.read(new File("src/images/" + (i + 1) + ".png"));
+                p.icon = ImageIO.read(new File("src/images/" + (i) + ".png"));
                 i++;
             }
         } catch (IOException e) {
@@ -61,16 +60,16 @@ public class Board extends JPanel {
         }
     }
 
-    private void loadTile(){
-        gameboard = new Tile[42][];
-        for(int i = 0; i < 42; i++)
-        if(i % 7 == 0){
-            gameboard[i] = new Tile[7];
-            gameboard[i][0] = new Tile(i + 1 );
-
-        } else {
-            gameboard[i] = new Tile[1];
-            gameboard[i][0] = new Tile(i+ 1);
-        }
-    }
+//    private void loadTile(){
+//        gameboard = new Tile[42][];
+//        for(int i = 0; i < 42; i++)
+//        if(i % 7 == 0){
+//            gameboard[i] = new Tile[7];
+//            gameboard[i][0] = new Tile(i + 1 );
+//
+//        } else {
+//            gameboard[i] = new Tile[1];
+//            gameboard[i][0] = new Tile(i+ 1);
+//        }
+//    }
 }
